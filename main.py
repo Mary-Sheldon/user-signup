@@ -17,7 +17,7 @@ def empty_val(x):
         return False
 
 def char_length(x):
-    if len(x)>3 and len(x)<21:
+    if len(x)>2 and len(x)<21:
         return True
     else:
         return False
@@ -60,14 +60,16 @@ def display_signup():
 
     username_error = ''
     password_error= ''
-    verify_error=''
+    password_validate_error=''
     email_error=''
 
     empty_error = 'Please enter something'
-    char_error = 'username must be between 3 and 20 characters'
+    char_error = ' must be between 3 and 20 characters'
     password_error_e = "please re-enter your password"
     space_error = 'You cannot uses spaces'
-    password_validate_error = password_error_e
+    
+# this is the password validaton
+
 
     if not empty_val(password):
         password_error = empty_error
@@ -92,7 +94,6 @@ def display_signup():
         password_validate = ''
         password_error = 'Passwords must match'
 
-
     if not empty_val(username):
         username_error = empty_error
         password = ''
@@ -115,7 +116,7 @@ def display_signup():
 
 
 
-    
+    if empty_val(email):
         if not char_length(email):
             email_error = "Email " + char_error
             password = ''
@@ -153,12 +154,15 @@ def display_signup():
                 password_validate = ''
                 password_error = password_error_e
                 password_validate_error = password_error_e
+
    
-   
-    #if not username_error and not password_error and not password_validate_error and not email_error:
+    if not username_error and not password_error and not password_validate_error and not email_error:
+        username = username
         return redirect('/welcome?username={0}'.format(username))
-    #else:
-      #  return render_template('form.html', username_error=username_error, username=username, password_error=password_error, password=password, password_validate_error=password_validate_error, password_validate=password_validate, email_error=email_error, email=email)
+    else:
+        return render_template('form.html', username_error=username_error, username=username, 
+        password_error=password_error, password=password, password_validate_error=password_validate_error, 
+        password_validate=password_validate, email_error=email_error, email=email)
 
 
 
